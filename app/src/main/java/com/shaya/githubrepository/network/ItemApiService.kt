@@ -3,6 +3,7 @@ package com.shaya.githubrepository.network
 import com.chuckerteam.chucker.api.ChuckerInterceptor
 import com.shaya.githubrepository.BASE_URL
 import com.shaya.githubrepository.BaseApplication
+import com.shaya.githubrepository.END_POINT
 import com.shaya.githubrepository.network.gitresponse.GitResponse
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
@@ -29,7 +30,7 @@ private val retrofit = Retrofit.Builder()
 interface ItemApiService {
 
 
-    @GET("repos/{owner}/{repo}")
+    @GET(END_POINT)
     suspend fun getGithubRepository(
         @Path("owner") owner: String,
         @Path("repo") repo: String

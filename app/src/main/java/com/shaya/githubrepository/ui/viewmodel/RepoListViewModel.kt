@@ -1,10 +1,12 @@
 package com.shaya.githubrepository.ui.viewmodel
 
+import android.widget.Toast
 import androidx.lifecycle.*
 import com.shaya.githubrepository.BaseApplication
 import com.shaya.githubrepository.data.RoomItem
 import com.shaya.githubrepository.data.RoomItemDao
 import com.shaya.githubrepository.network.ItemApi
+import com.shaya.githubrepository.utils.NetworkAvailability
 import kotlinx.coroutines.launch
 
 class RepoListViewModel: ViewModel() {
@@ -25,25 +27,23 @@ class RepoListViewModel: ViewModel() {
         }
     }
 
-    fun retrieveItem(id: Int): LiveData<RoomItem> {
-        return roomItemDao.getItem(id).asLiveData()
-    }
-
     fun getGitHubRepo(owner: String, repo: String){
         viewModelScope.launch {
+            _status?.value = ItemApiStatus.LOADING
             try {
-                val response = ItemApi.retrofitService.getGithubRepository(
-                    owner = owner,
-                    repo = repo
-                )
-                val repoRoomItem = RoomItem(
-                    name = response.name.orEmpty(),
-                    owner = response.owner?.login.orEmpty(),
-                    description = response.description.orEmpty(),
-                    url = response.html_url.orEmpty()
-                )
-                insertItem(repoRoomItem)
-                _status?.value = ItemApiStatus.DONE
+                    val response = ItemApi.retrofitService.getGithubRepository(
+                        owner = owner,
+                        repo = repo
+                    )
+                    val repoRoomItem = RoomItem(
+                        name = response.name.orEmpty(),
+                        owner = response.owner?.login.orEmpty(),
+                        description = response.description.orEmpty(),
+                        url = response.html_url.orEmpty()
+                    )
+                    insertItem(repoRoomItem)
+                    _status?.value = ItemApiStatus.DONE
+
             } catch (e: Exception) {
                 e.printStackTrace()
                 _status?.value = ItemApiStatus.ERROR

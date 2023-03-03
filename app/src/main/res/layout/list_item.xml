@@ -31,6 +31,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="end|center_vertical"
                 android:src="@drawable/ic_share"
+                android:background="?android:attr/selectableItemBackground"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:tint="@color/grey_70" />
@@ -46,6 +47,7 @@
                 android:textColor="@color/grey_70"
                 android:textSize="24sp"
                 android:textStyle="bold"
+                android:background="?android:attr/selectableItemBackground"
                 app:drawableEndCompat="@drawable/ic_baseline_link_24"
                 app:drawableTint="@color/blue"
                 app:layout_constraintEnd_toEndOf="parent"

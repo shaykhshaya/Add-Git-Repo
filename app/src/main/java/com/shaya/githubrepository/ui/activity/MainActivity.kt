@@ -23,6 +23,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
         roomViewModel = ViewModelProvider(this)[RepoListViewModel::class.java]
         initViews()
         observeRepos()
@@ -57,6 +58,5 @@ class MainActivity : AppCompatActivity() {
             }
         }
     }
-
 
 }
