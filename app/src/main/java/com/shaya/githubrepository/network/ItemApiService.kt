@@ -3,14 +3,14 @@ package com.shaya.githubrepository.network
 import com.chuckerteam.chucker.api.ChuckerInterceptor
 import com.shaya.githubrepository.BASE_URL
 import com.shaya.githubrepository.BaseApplication
-import com.shaya.githubrepository.end_point
-import com.shaya.githubrepository.network.responses.GithubResponse
+import com.shaya.githubrepository.network.gitresponse.GitResponse
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import retrofit2.http.GET
+import retrofit2.http.Path
 
 private val moshi = Moshi.Builder()
     .add(KotlinJsonAdapterFactory())
@@ -27,8 +27,13 @@ private val retrofit = Retrofit.Builder()
     .build()
 
 interface ItemApiService {
-    @GET(end_point)
-    suspend fun getFavouriteRepositories(): GithubResponse
+
+
+    @GET("repos/{owner}/{repo}")
+    suspend fun getGithubRepository(
+        @Path("owner") owner: String,
+        @Path("repo") repo: String
+    ): GitResponse
 }
 
 object ItemApi {

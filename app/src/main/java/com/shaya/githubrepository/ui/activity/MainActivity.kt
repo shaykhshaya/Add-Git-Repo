@@ -33,7 +33,7 @@ class MainActivity : AppCompatActivity() {
             binding.btnAdd.performClick()
         }
         binding.btnAdd.setOnClickListener {
-            startActivity(Intent(this, SelectRepoActivity::class.java))
+            startActivity(Intent(this, AddRepoActivity::class.java))
         }
 
         adapter = RepoListAdapter(

@@ -24,6 +24,10 @@
                 android:value="" />
         </activity>
         <activity
+            android:name=".ui.activity.AddRepoActivity"
+            android:exported="false">
+        </activity>
+        <activity
             android:name=".ui.activity.MainActivity"
             android:exported="true">
             <intent-filter>
